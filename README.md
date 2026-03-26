@@ -11,21 +11,20 @@
 
 ## Table of Contents
 
-1. [Project Overview](../Downloads/README (1).md#1-project-overview)
-2. [Directory Structure](../Downloads/README (1).md#2-directory-structure)
-3. [Pipeline Architecture](../Downloads/README (1).md#3-pipeline-architecture)
-4. [Components](../Downloads/README (1).md#4-components)
-   - [ingest.py](../Downloads/README (1).md#41-ingestpy--data-ingestion)
-   - [preprocess.ipynb](../Downloads/README (1).md#42-preprocessipynb--data-preprocessing)
-   - [analytics.ipynb](../Downloads/README (1).md#43-analyticsipynb--analytics--insights)
-   - [visualize.ipynb](../Downloads/README (1).md#44-visualizeipynb--visualization)
-   - [cluster.ipynb](../Downloads/README (1).md#45-clusteripynb--clustering-analysis)
-5. [Setup & Installation](../Downloads/README (1).md#5-setup--installation)
-6. [Running the Pipeline](../Downloads/README (1).md#6-running-the-pipeline)
-7. [Outputs Reference](../Downloads/README (1).md#7-outputs-reference)
-8. [Dependencies](../Downloads/README (1).md#8-dependencies)
-9. [Notes](../Downloads/README (1).md#9-notes)
-
+1. [Project Overview](#1-project-overview)
+2. [Directory Structure](#2-directory-structure)
+3. [Pipeline Architecture](#3-pipeline-architecture)
+4. [Components](#4-components)
+   - [ingest.py](#41-ingestpy--data-ingestion)
+   - [preprocess.ipynb](#42-preprocessipynb--data-preprocessing)
+   - [analytics.ipynb](#43-analyticsipynb--analytics--insights)
+   - [visualize.ipynb](#44-visualizeipynb--visualization)
+   - [cluster.ipynb](#45-clusteripynb--clustering-analysis)
+5. [Setup & Installation](#5-setup--installation)
+6. [Running the Pipeline](#6-running-the-pipeline)
+7. [Outputs Reference](#7-outputs-reference)
+8. [Dependencies](#8-dependencies)
+9. [Notes](#9-notes)
 ---
 
 ## 1. Project Overview
