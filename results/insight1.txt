@@ -1,0 +1,4 @@
+Insight 1: Top 3 genres by average score:
+1. 9: 2.02
+2. 11: 0.90
+3. 3: 0.75

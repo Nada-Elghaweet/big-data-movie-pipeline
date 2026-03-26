@@ -1,0 +1,1 @@
+Insight 2: Movies from 7 have the highest average score of 1.82.

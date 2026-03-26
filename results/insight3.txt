@@ -1,0 +1,1 @@
+Insight 3: Movies with rating '1' have the highest average gross revenue of $1.

@@ -1,0 +1,18 @@
+cluster_A (Score vs Votes):
+Number of movies in each cluster:
+Cluster 0 (popular & high rated): 1604 movies
+Cluster 1 (unpopular & low rated): 70 movies
+Cluster 2 (mixed / average): 2326 movies
+
+cluster_B (Budget vs Gross):
+Number of movies in each cluster:
+Cluster 0 (high budget & gross): 671 movies
+Cluster 1 (low budget & gross): 154 movies
+Cluster 2 (medium performance): 3175 movies
+
+cluster_C (All Features):
+Number of movies in each cluster:
+Cluster 0 (high score & votes & gross & budget & runtime): 1874 movies
+Cluster 1 (low everything): 287 movies
+Cluster 2 (average/mixed): 1839 movies
+
