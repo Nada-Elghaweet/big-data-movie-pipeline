@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 #  Movie Analytics Pipeline
 
 **Big Data Assignment**
@@ -346,6 +346,6 @@ All dependencies are installed automatically via the `Dockerfile`.
 - Label encoding is order-dependent; the `label_encoders` dictionary is retained in the notebook for potential inverse transformation.
 =======
 # big-data-movie-pipeline
->>>>>>> c85c2a7b9cae073388cb0b5deec08f2e1ca70cfc
-#   B i g _ D a t a _ M o v i e s  
+
+ 
  
