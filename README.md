@@ -6,7 +6,6 @@
 |---|---|
 | **Names** | Nada Ibrahim Elghaweet · Mazen Ayman · Youssef Ibrahim |
 | **IDs** | 231000941 · 231000718 · 231000834 |
-
 | **GitHub** | [Nada-Elghaweet/big-data-movie-pipeline](https://github.com/Nada-Elghaweet/big-data-movie-pipeline) |
 | **Docker Hub** | [nada2341/big_data_movies](https://hub.docker.com/r/nada2341/big_data_movies) |
 
@@ -55,7 +54,7 @@ Big_Data_Assignment/
 ├── analytics.py               # Stage 3: Insights extraction
 ├── visualize.py               # Stage 4: Visualization
 ├── cluster.py                 # Stage 5: Clustering analysis
-├── summary.sh                 # Pipeline orchestrator (runs Docker + copies results)
+├── summary.sh                 # Pipeline orchestrator
 ├── Dockerfile                 # Container definition
 ├── movies_updated.csv         # Raw input dataset
 │
@@ -116,7 +115,7 @@ movies_updated.csv
 - Reads the CSV using `pandas` and prints shape + first 5 rows
 - Saves the data as `data_raw.csv` for downstream stages
 
-**Output:** `data_raw.csv`
+**Output:** `results/data_raw.csv`
 
 ---
 
@@ -140,7 +139,7 @@ movies_updated.csv
 - Selects relevant columns: `rating`, `genre`, `score`, `votes`, `budget`, `gross`, `runtime`, `release_country`, `release_date`
 - Discretizes `score` into 3 quantile bins: `Low`→0, `Medium`→1, `High`→2 (stored as `score_bin`)
 
-**Input:** `data_raw.csv` → **Output:** `data_preprocessed.csv`
+**Input:** `data_raw.csv` → **Output:** `results/data_preprocessed.csv`
 
 ---
 
@@ -154,9 +153,9 @@ movies_updated.csv
 | Insight 2 | Which country has the highest average movie score? | `insight2.txt` |
 | Insight 3 | Which rating has the highest average gross revenue? | `insight3.txt` |
 
-> **Note:** Values are label-encoded integers (e.g. genre `9`, country `7`) since encoding happens in `preprocess.py` before this stage runs.
+> **Note:** Values are label-encoded integers since encoding happens in `preprocess.py` before this stage runs.
 
-**Input:** `data_preprocessed.csv` → **Output:** `insight1.txt`, `insight2.txt`, `insight3.txt`
+**Input:** `data_preprocessed.csv` → **Output:** `results/insight1.txt`, `insight2.txt`, `insight3.txt`
 
 ---
 
@@ -171,7 +170,7 @@ movies_updated.csv
 | Pairplot | `summary_pairplot.png` | Pairwise relationships between score, votes, gross |
 | Heatmap | `summary_heatmap.png` | Pearson correlation matrix for numeric features |
 
-**Input:** `data_preprocessed.csv` → **Output:** `summary_histograms.png`, `summary_scatter.png`, `summary_pairplot.png`, `summary_heatmap.png`
+**Input:** `data_preprocessed.csv` → **Output:** `results/summary_histograms.png`, `summary_scatter.png`, `summary_pairplot.png`, `summary_heatmap.png`
 
 ---
 
@@ -195,7 +194,7 @@ movies_updated.csv
 
 > **Note:** Cluster C is 5-dimensional; its plot uses Score vs Votes axes for 2D visualization.
 
-**Input:** `data_preprocessed.csv` → **Output:** `clusters_A_plot.png`, `clusters_B.png`, `clusters_C.png`, `clusters.txt`
+**Input:** `data_preprocessed.csv` → **Output:** `results/clusters_A_plot.png`, `clusters_B.png`, `clusters_C.png`, `clusters.txt`
 
 ---
 
@@ -238,13 +237,13 @@ docker push nada2341/big_data_movies:latest
 docker pull nada2341/big_data_movies:latest
 ```
 
-> The image is publicly available at: [nada2341/big_data_movies](https://hub.docker.com/r/nada2341/big_data_movies)
+> Image available at: [hub.docker.com/r/nada2341/big_data_movies](https://hub.docker.com/r/nada2341/big_data_movies)
 
 ---
 
 ## 6. Running the Pipeline
 
-The pipeline runs entirely from the **host machine** — no need to enter the container manually. Just run:
+The pipeline runs entirely from the **host machine** — no need to enter the container manually:
 
 ```bash
 bash summary.sh
@@ -262,8 +261,6 @@ This will:
 
 ## 7. Execution Flow
 
-Below is the actual terminal output from a successful pipeline run:
-
 ```
 Loaded dataset with 4000 rows and 15 columns.
 
@@ -277,8 +274,8 @@ Here's the first 5 rows:
 4                                      Caddyshack  ...     98.0,
 
 Saved raw data as data_raw.csv
-
 Dataset shape: (4000, 15)
+
 Missing values per column:
  rating              40
  writer               1
@@ -317,8 +314,6 @@ Insight 3: Movies with rating '1' have the highest average gross revenue of $1.
 
 clusters.txt created
 
-Successfully copied results to ./results/
-
 Pipeline finished! All results are now in ./results/
 ```
 
@@ -326,9 +321,8 @@ Pipeline finished! All results are now in ./results/
 
 ## 8. Sample Outputs
 
-### Insight Files
+### Insight 1 — Top 3 Genres by Average Score
 
-**insight1.txt**
 ```
 Insight 1: Top 3 genres by average score:
 1. 9: 2.02
@@ -336,50 +330,64 @@ Insight 1: Top 3 genres by average score:
 3. 3: 0.75
 ```
 
-**insight2.txt**
+### Insight 2 — Country with Highest Average Score
+
 ```
 Insight 2: Movies from 7 have the highest average score of 1.82.
 ```
 
-**insight3.txt**
+### Insight 3 — Rating with Highest Gross Revenue
+
 ```
 Insight 3: Movies with rating '1' have the highest average gross revenue of $1.
 ```
 
-### clusters.txt
+### Cluster Summary
+
 ```
 cluster_A (Score vs Votes):
 Number of movies in each cluster:
-Cluster 0 (popular & high rated): 412 movies
-Cluster 1 (unpopular & low rated): 2954 movies
-Cluster 2 (mixed / average): 634 movies
+Cluster 0 (popular & high rated): 1604 movies
+Cluster 1 (unpopular & low rated): 70 movies
+Cluster 2 (mixed / average): 2326 movies
 
 cluster_B (Budget vs Gross):
 Number of movies in each cluster:
-Cluster 0 (high budget & gross): 387 movies
-Cluster 1 (low budget & gross): 3201 movies
-Cluster 2 (medium performance): 412 movies
+Cluster 0 (high budget & gross): 671 movies
+Cluster 1 (low budget & gross): 154 movies
+Cluster 2 (medium performance): 3175 movies
 
 cluster_C (All Features):
 Number of movies in each cluster:
-Cluster 0 (high score & votes & gross & budget & runtime): 401 movies
-Cluster 1 (low everything): 3187 movies
-Cluster 2 (average/mixed): 412 movies
+Cluster 0 (high score & votes & gross & budget & runtime): 1874 movies
+Cluster 1 (low everything): 287 movies
+Cluster 2 (average/mixed): 1839 movies
 ```
+
+---
 
 ### Visualizations
 
-All plots are saved to `./results/`:
+#### Distribution Histograms
+![Histograms](results/summary_histograms.png)
 
-| File | Description |
-|------|-------------|
-| `summary_histograms.png` | Distribution of scores, gross revenue, and votes across 4000 movies |
-| `summary_scatter.png` | Score vs Votes and Score vs Gross scatterplots |
-| `summary_pairplot.png` | Pairwise relationships between score, votes, and gross |
-| `summary_heatmap.png` | Pearson correlation heatmap for budget, gross, score, votes, runtime |
-| `clusters_A_plot.png` | KMeans clusters by score and popularity |
-| `clusters_B.png` | KMeans clusters by budget and gross revenue |
-| `clusters_C.png` | KMeans clusters across all 5 features (visualized in 2D) |
+#### Score vs Votes & Score vs Gross
+![Scatter](results/summary_scatter.png)
+
+#### Pairplot — Score, Votes, Gross
+![Pairplot](results/summary_pairplot.png)
+
+#### Correlation Heatmap
+![Heatmap](results/summary_heatmap.png)
+
+#### Cluster A — Score vs Votes
+![Cluster A](results/clusters_A_plot.png)
+
+#### Cluster B — Budget vs Gross
+![Cluster B](results/clusters_B.png)
+
+#### Cluster C — All Features (5D → 2D)
+![Cluster C](results/clusters_C.png)
 
 ---
 
@@ -425,6 +433,7 @@ All installed automatically via the `Dockerfile`.
 - `set -e` in `summary.sh` ensures the pipeline **stops immediately** if any script fails.
 - KMeans uses `random_state=42` in all clustering runs for reproducible results.
 - `release_date` parsing uses `errors='coerce'` — unparseable dates become `NaT` and are filled with the mode (`1986-02-14`).
-- Insights report label-encoded integers because encoding happens in `preprocess.py` before `analytics.py` runs. The original category labels can be recovered using the `label_encoders` dictionary in `preprocess.py`.
-- `clusters_A` saves as `clusters_A_plot.png` (not `clusters_A.png`) — this matches the `docker cp` command in `summary.sh`.
-- The Docker image is publicly available at: [nada2341/big_data_movies](https://hub.docker.com/r/nada2341/big_data_movies)
+- Insights report label-encoded integers because encoding happens in `preprocess.py` before `analytics.py` runs. Original labels can be recovered using the `label_encoders` dictionary in `preprocess.py`.
+- `clusters_A` saves as `clusters_A_plot.png` — this matches the `docker cp` command in `summary.sh`.
+- Docker image: [nada2341/big_data_movies](https://hub.docker.com/r/nada2341/big_data_movies)
+- GitHub repo: [Nada-Elghaweet/big-data-movie-pipeline](https://github.com/Nada-Elghaweet/big-data-movie-pipeline)
