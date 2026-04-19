@@ -1,6 +1,9 @@
+import sys
 import pandas as pd
 
-df = pd.read_csv("data_preprocessed.csv")
+input_path = sys.argv[1]
+
+df = pd.read_csv(input_path)
 df.head()
 
 
@@ -41,3 +44,7 @@ print(insight3)
 
 with open("insight3.txt", "w") as f:
     f.write(insight3)
+
+
+import subprocess
+subprocess.run(["python", "visualize.py", input_path])

@@ -1,9 +1,10 @@
 import pandas as pd
-import numpy as np
+import sys
 from sklearn.preprocessing import LabelEncoder, StandardScaler
-from sklearn.decomposition import PCA
 
-df = pd.read_csv("data_raw.csv")
+input_path = sys.argv[1]
+
+df = pd.read_csv(input_path)
 
 print("Dataset shape:", df.shape)
 
@@ -81,3 +82,7 @@ df_reduced
 
 df_reduced.to_csv("data_preprocessed.csv", index=False)
 print("Saved preprocessed data as data_preprocessed.csv")
+
+
+import subprocess
+subprocess.run(["python", "analytics.py" , "data_preprocessed.csv"])

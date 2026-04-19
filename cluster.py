@@ -1,9 +1,11 @@
+import sys
 import pandas as pd
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
-df = pd.read_csv("data_preprocessed.csv")
+input_path = sys.argv[1]
 
+df = pd.read_csv(input_path)
 
 """
 # Cluster_A (Score & Votes)

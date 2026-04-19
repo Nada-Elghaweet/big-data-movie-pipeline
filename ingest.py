@@ -1,7 +1,7 @@
 import sys
 import pandas as pd
 
-if len(sys.argv) < 2:
+if len(sys.argv) != 2:
     print("Usage: python ingest.py <dataset_path>")
     sys.exit(1)
 
@@ -19,3 +19,7 @@ try:
 except Exception as e:
     print(f"Error loading dataset: {e}")
     print("Usage: python ingest.py <dataset_path>")
+
+
+import subprocess
+subprocess.run(["python", "preprocess.py", "data_raw.csv"])

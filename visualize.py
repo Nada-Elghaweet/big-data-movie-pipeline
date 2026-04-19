@@ -1,10 +1,11 @@
+import sys
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import numpy as np
 
-df = pd.read_csv("data_preprocessed.csv")
+input_path = sys.argv[1]
 
+df = pd.read_csv(input_path)
 
 """
 # Histogram
@@ -79,3 +80,8 @@ sns.heatmap(corr, annot=True, cmap='coolwarm', fmt=".2f")
 plt.title("Correlation Heatmap: Score, Votes, Gross, Budget, Runtime")
 plt.savefig("summary_heatmap.png")
 plt.show()
+
+
+
+import subprocess
+subprocess.run(["python", "cluster.py", input_path])
