@@ -7,7 +7,7 @@
 | **Names** | Nada Ibrahim Elghaweet · Mazen Ayman · Youssef Ibrahim |
 | **IDs** | 231000941 · 231000718 · 231000834 |
 | **GitHub** | [Nada-Elghaweet/big-data-movie-pipeline](https://github.com/Nada-Elghaweet/big-data-movie-pipeline) |
-| **Docker Hub** | [nada2341/big_data_movies](https://hub.docker.com/r/nada2341/big_data_movies) |
+| **Docker Hub** | [nada2341/big_data_3](https://hub.docker.com/r/nada2341/big_data_3) |
 
 ---
 
